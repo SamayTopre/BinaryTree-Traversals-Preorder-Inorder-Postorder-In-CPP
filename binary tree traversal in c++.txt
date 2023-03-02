@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+class node
+{
+public:
+    node *left;
+    node *right;
+    int data;
+};
+node *create_binary_tree()
+{
+    node *newnode = new node();
+    int x;
+    cout << " -> enter data:";
+    cin >> x;
+    if (x == -1)
+    {
+        return NULL;
+    }
+    else
+    {
+
+        newnode->data = x;
+        cout << "enter data for left child of " << x;
+        newnode->left = create_binary_tree();
+        cout << "enter data for right child of " << x;
+        newnode->right = create_binary_tree();
+    }
+    return newnode;
+}
+void preorder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    else
+    {
+        cout << root->data;
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+void inorder(node *root)
+{
+
+    if (root == NULL)
+    {
+        return;
+    }
+    else
+    {
+        inorder(root->left);
+        cout << root->data;
+        inorder(root->right);
+    }
+}
+void postorder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    else
+    {
+        postorder(root->left);
+        postorder(root->right);
+        cout << root->data;
+    }
+}
+
+int main()
+{
+    node *root = NULL;
+    root = create_binary_tree();
+    cout << "\n";
+    cout << "preorder tranversal is: ";
+    preorder(root);
+    cout << "\n";
+    cout << "postorder tranversal is: ";
+    postorder(root);
+    cout << "\n";
+    cout << "inorder tranversal is: ";
+    inorder(root);
+    cout << "\n";
+}
